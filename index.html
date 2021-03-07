@@ -1,14 +1,17 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Smart Gardener</title>
+		<meta name="description" content="Smart Gardener">
+		<meta name="author" content="Maciej Małecki">
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
@@ -16,8 +19,85 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-background-image="img/koniuszko.jpg" data-background-opacity="0.8">
+					<h2>Smart Gardener</h2>
+					<h3>with ESP8266, HomeAssistant and RPi3</h3>
+					<p>Maciej Małecki</p>
+				</section>
+
+				<section>motywacja</section>
+
+				<section>
+					teoria: wydajność źródła, rodzaje nawodnienia, topologia instalacji
+				</section>
+
+				<section>
+					hardware: instalacja hydrauliczna, schemat
+				</section>
+
+				<section>
+					teoria: sterowniki
+				</section>
+
+				<section>
+					ESP8266 przypomnienie
+				</section>
+
+				<section>
+					ESP Easy przypomnienie
+				</section>
+
+				<section>
+					Elementy funkcjonalne
+					<section>
+						przekaźniki i zasilanie
+					</section>
+					<section>
+						czujnik wilgotności
+					</section>
+					<section>
+						czujnik przepływu
+					</section>
+					<section>
+						kompletny schemat
+					</section>
+				</section>
+
+				<section>
+					HomeAssistant
+					<section>
+						MQTT
+					</section>
+					<section>
+						Sterowanie ręczna
+					</section>
+					<section>
+						Krzywa
+					</section>
+					<section>
+						Automatyka
+					</section>
+					<section>
+						Notyfikacje
+					</section>
+				</section>
+
+				<section>
+					to be improved
+					<section>
+						zintegrowane zasilanie
+					</section>
+					<section>
+						Wemos D1 Mini Pro + zewn antena
+					</section>
+					<section>
+						Układ we/wy - wsparcie dla 8-miu obwodów
+					</section>
+				</section>
+
+				<section>
+					QA
+				</section>
 			</div>
 		</div>
 
@@ -30,8 +110,10 @@
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+				width: 1100,
 				hash: true,
-
+				navigationMode: 'linear',
+				slideNumber: 'c/t',
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
