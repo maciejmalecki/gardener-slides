@@ -1,0 +1,17 @@
+.reveal .hspace {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.reveal .hspace-small {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+.reveal .bg1 {
+    background-color: magenta;
+}
+.reveal .bg2 {
+    background-color: cyan;
+}
+.reveal .black {
+    color: black;
+}
