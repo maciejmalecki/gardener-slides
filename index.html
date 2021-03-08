@@ -1,164 +1,360 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Smart Gardener</title>
-		<meta name="description" content="Smart Gardener">
-		<meta name="author" content="Maciej Małecki">
+  <title>Smart Gardener</title>
+  <meta name="description" content="Smart Gardener">
+  <meta name="author" content="Maciej Małecki">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
-		<link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/night.css" id="theme">
+  <link rel="stylesheet" href="css/custom.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-background-image="img/koniuszko.jpg" data-background-opacity="0.8">
-					<h2>Smart Gardener</h2>
-					<h3>with ESP8266, HomeAssistant and RPi3</h3>
-					<p>Maciej Małecki</p>
-				</section>
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section data-background-image="img/koniuszko.jpg" data-background-opacity="0.8">
+      <h2>Smart Gardener</h2>
+      <h3>with ESP8266, HomeAssistant and RPi3</h3>
+      <p>Maciej Małecki</p>
+    </section>
 
-				<section>
-					<h3>Motivation</h3>
-					<div class="r-hstack">
-						<img src="img/tree-1.jpg" alt="1">
-						<img src="img/tree-2.jpg" alt="2">
-						<img src="img/tree-3.jpg" alt="3">
-					</div>
-				</section>
+    <section>
+      <h3>Motivation</h3>
+      <div class="r-hstack">
+        <img src="img/tree-1.jpg" alt="1">
+        <img src="img/tree-2.jpg" alt="2">
+        <img src="img/tree-3.jpg" alt="3">
+      </div>
+    </section>
 
-				<section>
-					teoria: wydajność źródła, rodzaje nawodnienia, topologia instalacji
-				</section>
+    <section>
+      teoria: wydajność źródła, rodzaje nawodnienia, topologia instalacji
+    </section>
 
-				<section>
-					<h3>Hardware: the hydraulics</h3>
+    <section>
+      <h3>Hardware: the hydraulics</h3>
 
-					<section>
-						<div class="r-hstack">
-							<img src="img/electro-valve%20.jpg" alt="Valve" style="height: 350px;">
-							<div class="hspace">
-								<ul>
-									<li>operating voltage: 12V</li>
-									<li>current: 0.6A</li>
-									<li>power: 8W</li>
-									<li>max. pressure: 0.8MPa</li>
-									<li>cost: ~25PLN</li>
-								</ul>
-							</div>
-						</div>
-					</section>
+      <section>
+        <div class="r-hstack">
+          <img src="img/electro-valve%20.jpg" alt="Valve" style="height: 350px;">
+          <div class="hspace">
+            <ul>
+              <li>operating voltage: 12V</li>
+              <li>current: 0.6A</li>
+              <li>power: 8W</li>
+              <li>max. pressure: 0.8MPa</li>
+              <li>cost: ~25PLN</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-					<section>
-						<div class="r-hstack">
-							<img src="img/valves-2.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
-							<img src="img/valves-1.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
-						</div>
-					</section>
-				</section>
+      <section>
+        <div class="r-hstack">
+          <img src="img/valves-2.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
+          <img src="img/valves-1.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
+        </div>
+      </section>
+    </section>
 
-				<section>
-					teoria: sterowniki
-				</section>
+    <section>
+      teoria: sterowniki
+    </section>
 
-				<section>
-					<h3>ESP 8266</h3>
-					<div class="r-hstack">
-						<img src="img/esp-12s.png" alt="ESP-12S">
-						<div class="hspace">
-							<ul>
-								<li>powerful RISC CPU: 80-160MHz</li>
-								<li>flash memory: 512KiB - 16MiB</li>
-								<li>onboard WiFi</li>
-								<li>2-10 GPIO or more</li>
-								<li>1 ADC</li>
-								<li><span class="black bg2">damn cheap &#129477;&#129477;&#129477;</span></li>
-							</ul>
-						</div>
-					</div>
-				</section>
+    <section>
+      <h3>ESP 8266</h3>
+      <div class="r-hstack">
+        <img src="img/esp-12s.png" alt="ESP-12S">
+        <div class="hspace">
+          <ul>
+            <li>powerful RISC CPU: 80-160MHz</li>
+            <li>flash memory: 512KiB - 16MiB</li>
+            <li>onboard WiFi</li>
+            <li>2-10 GPIO or more</li>
+            <li>1 ADC</li>
+            <li><span class="black bg2">damn cheap &#129477;&#129477;&#129477;</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-				<section>
-					ESP Easy przypomnienie
-				</section>
+    <section>
+      ESP Easy przypomnienie
+    </section>
 
-				<section>
-					Elementy funkcjonalne
-					<section>
-						przekaźniki i zasilanie
-					</section>
-					<section>
-						czujnik wilgotności
-					</section>
-					<section>
-						czujnik przepływu
-					</section>
-					<section>
-						kompletny schemat
-					</section>
-				</section>
+    <section>
+      Elementy funkcjonalne
+      <section>
+        przekaźniki i zasilanie
+      </section>
+      <section>
+        czujnik wilgotności
+      </section>
+      <section>
+        czujnik przepływu
+      </section>
+      <section>
+        kompletny schemat
+      </section>
+    </section>
 
-				<section>
-					HomeAssistant
-					<section>
-						MQTT
-					</section>
-					<section>
-						Sterowanie ręczna
-					</section>
-					<section>
-						Krzywa
-					</section>
-					<section>
-						Automatyka
-					</section>
-					<section>
-						Notyfikacje
-					</section>
-				</section>
+    <section>
+      <h3>ESP Easy - implementation</h3>
 
-				<section>
-					to be improved
-					<section>
-						zintegrowane zasilanie
-					</section>
-					<section>
-						Wemos D1 Mini Pro + zewn antena
-					</section>
-					<section>
-						Układ we/wy - wsparcie dla 8-miu obwodów
-					</section>
-				</section>
+      <section>
+        <div class="r-vstack">
+          <figure>
+            <img src="img/esp-easy-listener.jpg" alt="Listener">
+            <figcaption>import from MQTT - trigger</figcaption>
+          </figure>
+          <figure>
+            <img src="img/esp-easy-dummy.jpg" alt="Dummy">
+            <figcaption>variables for valve opening calculations</figcaption>
+          </figure>
+          <figure>
+            <img src="img/esp-easy-adjustment.jpg" alt="Adjustment">
+            <figcaption>import from MQTT - valve configuration</figcaption>
+          </figure>
+        </div>
+      </section>
 
-				<section>
-					QA
-				</section>
-			</div>
-		</div>
+      <section>
+        <pre><code class="hljs" data-trim data-line-numbers="|1|2-13|15-18|20-27|28-31|35-50|52-66|68-82|84-88">
+          on listener#valveCmd do
+            if [listener#valveCmd]<=0
+              TimerSet,1,0
+              TimerSet,2,0
+              TimerSet,3,0
+              TimerSet,4,0
+              GPIO,5,0
+              GPIO,4,0
+              GPIO,14,0
+              GPIO,12,0
+              Publish,"Podlewacz/valve/state", 0
+              Publish,"Podlewacz/state","Emergency shut-off"
+            else
+              if [listener#valveCmd]<2600
+                TaskValueSet,3,1,[listener#valveCmd]*[adjustment#valve1]
+                TaskValueSet,3,2,[listener#valveCmd]*[adjustment#valve2]
+                TaskValueSet,3,3,[listener#valveCmd]*[adjustment#valve3]
+                TaskValueSet,3,4,[listener#valveCmd]*[adjustment#valve4]
+                Publish,"Podlewacz/valve/state", 1
+                if [valves0#valve1]>=1
+                  GPIO,5,1
+                  Publish,"Podlewacz/state","Valve 1 open"
+                  if [valves0#valve1]<2400
+                    TimerSet,1,[valves0#valve1]
+                  else
+                    TimerSet,1,2400
+                  endif
+                else
+                  Publish,"Podlewacz/state","Valve 1 skipped"
+                  TimerSet,1,3
+                endif
+              endif
+            endif
+          endon
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				width: 1100,
-				hash: true,
-				navigationMode: 'linear',
-				slideNumber: 'c/t',
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          on Rules#Timer=1 do
+            GPIO,5,0
+            if [valves0#valve2]>=1
+              GPIO,4,1
+              Publish,"Podlewacz/state","Valve 2 open"
+              if [valves0#valve2]<2400
+                TimerSet,2,[valves0#valve2]
+              else
+                TimerSet,2,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 2 skipped"
+              TimerSet,2,3
+            endif
+          endon
+
+          on Rules#Timer=2 do
+            GPIO,4,0
+            if [valves0#valve3]>=1
+              GPIO,14,1
+              Publish,"Podlewacz/state","Valve 3 open"
+              if [valves0#valve3]<2400
+                TimerSet,3,[valves0#valve3]
+              else
+                TimerSet,3,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 3 skipped"
+              TimerSet,3,3
+            endif
+          endon
+
+          on Rules#Timer=3 do
+            GPIO,14,0
+            if [valves0#valve4]>=1
+              GPIO,12,1
+              Publish,"Podlewacz/state","Valve 4 open"
+              if [valves0#valve4]<2400
+                TimerSet,4,[valves0#valve4]
+              else
+                TimerSet,4,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 4 skipped"
+              TimerSet,4,3
+            endif
+          endon
+
+          on Rules#Timer=4 do
+              GPIO,12,0
+              Publish,"Podlewacz/valve/state",0
+              Publish,"Podlewacz/state","Idle"
+          endon
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <h3>Home Assistant</h3>
+      <section>
+        <img src="img/architecture.png" alt="Architecture">
+      </section>
+      <section>
+        MQTT
+      </section>
+      <section>
+        <div class="r-hstack">
+          <img src="img/hass-panel.jpg" alt="Panel" style="height: 420px;">
+          <div style="margin-left: 1em;" class="small">
+            <ol>
+              <li>Soil humidity indicator.</li>
+              <li>Automatic mode configuration.</li>
+              <li>Watering "curve" configuration.</li>
+              <li>Valve weighting.</li>
+              <li>"Hysteresis" status.</li>
+              <li>Manual watering trigger.</li>
+              <li>Emergency shut down trigger..</li>
+              <li>Manual watering time slider.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <section>
+        Sterowanie ręczna
+      </section>
+      <section>
+        <p>Watering curve</p>
+        \[
+        t = \left\{ \begin{array}{ll}
+                      0, &amp; h > h_{max} \\
+                      t_{max}, &amp; h < h_{min} \\
+                      \frac{t_{max} - t_{min}}{h_{max} - h_{min}} (h - h_{min}) + t_{min}, &amp; h_{min} <= h <= h_{max}
+                    \end{array}
+            \right. \]
+      </section>
+      <section>
+        <pre class="yaml"><code class="hljs" data-trim data-line-numbers>
+          automation:
+           - alias: "Smart gardener checks for condition once per day"
+             trigger:
+               platform: time
+               at: "03:00:00"
+             action:
+               service: script.evaluate_watering_time
+          script:
+             evaluate_watering_time:
+               sequence:
+                 - condition: state
+                   entity_id: 'input_boolean.watering_enable'
+                   state: 'on'
+                 - condition: numeric_state
+                   entity_id: 'input_number.watering_delay_counter'
+                   below: 1
+                 - service: system_log.write
+                   data_template:
+                     message: >
+                        Running the script
+                        {{ states('sensor.wilgotnosc_gruntu') | float }},
+                        {{ states('input_number.watering_off_threshold') | float }}
+                     level: debug
+                     logger: homeassistant.podlewacz
+                 - service: mqtt.publish
+                   data:
+                     topic: Podlewacz/listener/valveCmd
+                     payload_template: >
+                       {% if states('sensor.wilgotnosc_gruntu') | float
+                          > states('input_number.watering_off_threshold') | float %}
+                         0.0
+                       {% elif states('sensor.wilgotnosc_gruntu') | float
+                          < states('input_number.watering_full_threshold') | float %}
+                         {{ (states('input_number.watering_maximal_time') | float)*60 }}
+                       {% else %}
+                         {{ (
+                              (
+                                states('input_number.watering_maximal_time') | float
+                                - states('input_number.watering_minimal_time') | float
+                              )
+                            /
+                              (
+                                states('input_number.watering_full_threshold') | float
+                                - states('input_number.watering_off_threshold') | float
+                              )
+                            *
+                              (
+                                states('sensor.wilgotnosc_gruntu') | float
+                                - states('input_number.watering_off_threshold') | float
+                              )
+                            + states('input_number.watering_minimal_time') | float
+                            )*60 }}
+                       {% endif %}
+        </code></pre>
+      </section>
+      <section>
+        Notyfikacje
+      </section>
+    </section>
+
+    <section>
+      to be improved
+      <section>
+        zintegrowane zasilanie
+      </section>
+      <section>
+        Wemos D1 Mini Pro + zewn antena
+      </section>
+      <section>
+        Układ we/wy - wsparcie dla 8-miu obwodów
+      </section>
+    </section>
+
+    <section>
+      QA
+    </section>
+  </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        width: 1200,
+        hash: true,
+        navigationMode: 'linear',
+        slideNumber: 'c/t',
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+    });
+</script>
+</body>
 </html>
