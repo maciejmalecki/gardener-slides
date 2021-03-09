@@ -28,3 +28,18 @@
 .reveal .small {
     font-size: 0.75em;
 }
+.reveal .htiles img {
+    height: 150px;
+    border-radius: 1em;
+    padding: 1em;
+    background-color: white;
+    margin: 0.5em;
+}
+
+.reveal .hsmalltiles img {
+    height: 100px;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background-color: white;
+    margin: 0.25em;
+}
