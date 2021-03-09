@@ -220,8 +220,9 @@
     </section>
 
     <section>
-      <h3>Home Assistant</h3>
+      <img src="img/home-assistant-logo.svg" alt="Hass" style="height: 100px; width: 100px; position: absolute; left: 0; top: 0; opacity: 0.5">
       <section>
+        <p>Architecture with Home Assistant and MQTT</p>
         <img src="img/architecture.png" alt="Architecture">
       </section>
       <section>
@@ -248,14 +249,64 @@
         Sterowanie ręczna
       </section>
       <section>
-        <p>Watering curve</p>
-        \[
-        t = \left\{ \begin{array}{ll}
-                      0, &amp; h > h_{max} \\
-                      t_{max}, &amp; h < h_{min} \\
-                      \frac{t_{max} - t_{min}}{h_{max} - h_{min}} (h - h_{min}) + t_{min}, &amp; h_{min} <= h <= h_{max}
-                    \end{array}
-            \right. \]
+        <h4>Time depends on humidity</h4>
+        <div>
+          <p class="gray">given input parameters:</p>
+          \[ t_{min}, t_{max}, h_{min}, h_{max} \]
+        </div>
+        <div>
+          <p class="gray">then we have:</p>
+            \[ t = \left\{ \begin{array}{ll}
+                          0, &amp; h > h_{max} \\
+                          t_{max}, &amp; h < h_{min} \\
+                          \frac{t_{max} - t_{min}}{h_{max} - h_{min}} (h_{min} - h) + t_{min}, &amp; h_{min} <= h <= h_{max}
+                        \end{array}
+                \right. \]
+        </div>
+      </section>
+      <section>
+        <div class="r-vstack">
+          <div>
+            \[ \begin{array}{ll}
+                  t_{min} = 0 &amp; t_{max} = 45 \\
+                  h_{min} = 20 &amp; h_{max} = 80 \\
+              \end{array}
+            \]
+          </div>
+          <canvas data-chart="line" width="300" height="100">
+            <!--
+            {
+              "data": {
+                "datasets": [{
+                  "label": "Watering time on humidity",
+                  "data": [45,45,0,0]
+                }],
+                "labels": [0,20,80,100]
+              },
+              "options": {
+                "scales" : {
+                  "xAxes": [{
+                    "scaleLabel": {
+                      "display": "true",
+                      "labelString": "soil humidity [%]"
+                    }
+                  }],
+                  "yAxes": [{
+                    "scaleLabel": {
+                      "display": "true",
+                      "labelString": "time [min]"
+                    },
+                    "ticks": {
+                      "suggestedMin": 0,
+                      "suggestedMax": 60
+                    }
+                  }]
+                }
+              }
+            }
+            -->
+          </canvas>
+        </div>
       </section>
       <section>
         <pre class="yaml"><code class="hljs" data-trim data-line-numbers>
@@ -343,6 +394,8 @@
 <script src="plugin/markdown/markdown.js"></script>
 <script src="plugin/highlight/highlight.js"></script>
 <script src="plugin/math/math.js"></script>
+<script src="plugin/chart/Chart.min.js"></script>
+<script src="plugin/chart/plugin.js"></script>
 <script>
     // More info about initialization & config:
     // - https://revealjs.com/initialization/
@@ -353,7 +406,31 @@
         navigationMode: 'linear',
         slideNumber: 'c/t',
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+        chart: {
+            defaults: {
+                global: {
+                    title: { fontColor: "#FFF" },
+                    legend: {
+                        position: "bottom",
+                        labels: { fontColor: "#FFF" },
+                    },
+                    tooltips: {
+                        labels: { fontColor: "#FFF" },
+                    },
+                },
+                scale: {
+                    scaleLabel: { fontColor: "#FFF" },
+                    gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                    ticks: { fontColor: "#FFF" },
+                }
+            },
+            line: { borderColor: [ "magenta" , "cyan", "red" ],
+                lineTension: "0", cubicInterpolationMode: "default"},
+            bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+            pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+            radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+        },
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealChart]
     });
 </script>
 </body>

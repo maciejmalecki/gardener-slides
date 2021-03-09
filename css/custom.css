@@ -15,6 +15,9 @@
 .reveal .black {
     color: black;
 }
+.reveal .gray {
+    color: lightslategray;
+}
 .reveal figure>figcaption {
     font-size: 0.5em;
     margin-bottom: 0.5em;
