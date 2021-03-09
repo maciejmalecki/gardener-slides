@@ -1,0 +1,50 @@
+.reveal .hspace {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.reveal .hspace-small {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+.reveal .bg1 {
+    background-color: magenta;
+}
+.reveal .bg2 {
+    background-color: cyan;
+}
+.reveal .black {
+    color: black;
+}
+.reveal .gray {
+    color: lightslategray;
+}
+.reveal figure>figcaption {
+    font-size: 0.5em;
+    margin-bottom: 0.5em;
+}
+.reveal figure>img {
+    margin-bottom: 0.125em;
+}
+.reveal .small {
+    font-size: 0.75em;
+}
+.reveal .htiles img {
+    height: 150px;
+    border-radius: 1em;
+    padding: 1em;
+    background-color: white;
+    margin: 0.5em;
+}
+.reveal .hbigtiles img {
+    height: 250px;
+    border-radius: 1em;
+    padding: 1em;
+    background-color: white;
+    margin: 0.5em;
+}.reveal .hsmalltiles img {
+    height: 100px;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    background-color: white;
+    margin: 0.25em;
+}

@@ -1,40 +1,522 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+  <title>Smart Gardener</title>
+  <meta name="description" content="Smart Gardener">
+  <meta name="author" content="Maciej Małecki">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/night.css" id="theme">
+  <link rel="stylesheet" href="css/custom.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section data-background-image="img/koniuszko.jpg" data-background-opacity="0.8">
+      <h2>Smart Gardener</h2>
+      <h3>with ESP8266, HomeAssistant and RPi3</h3>
+      <p>Maciej Małecki</p>
+    </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <section>
+      <h3>Motivation</h3>
+      <div class="r-hstack">
+        <img src="img/tree-1.jpg" alt="1">
+        <img src="img/tree-2.jpg" alt="2">
+        <img src="img/tree-3.jpg" alt="3">
+      </div>
+    </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <section>
+      <h3>Theory</h3>
+      <div>
+        <p class="gray">water pressure</p>
+        \[ 2.5 [bar] < pressure < 5 [bar]\]
+      </div>
+      <div class="fragment">
+        <p class="gray">water flow</p>
+      \[ flow = 3.6 \times \frac{volume}{time} \bigg[\frac{m^3}{h}\bigg] \]
+      </div>
+    </section>
+
+    <section>
+      <img src="img/house.jpg" alt="House">
+    </section>
+
+    <section>
+      <h3>Hardware: the hydraulics</h3>
+
+      <section>
+        <div class="htiles">
+          <img src="img/valve-gardena.jpg" alt="Valve" style="height: 300px;">
+        </div>
+      </section>
+
+      <section>
+        <div class="r-hstack">
+          <img src="img/electro-valve%20.jpg" alt="Valve" style="height: 350px;">
+          <div class="hspace">
+            <ul>
+              <li>operating voltage: 12V</li>
+              <li>current: 0.6A</li>
+              <li>power: 8W</li>
+              <li>max. pressure: 0.8MPa</li>
+              <li>cost: ~25PLN</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="r-hstack">
+          <img src="img/valves-2.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
+          <img src="img/valves-1.jpg" alt="Valves" style="height: 400px;" class="hspace-small">
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <h3>Controllers</h3>
+      <div class="r-vstack htiles">
+        <div class="r-hstack">
+          <img src="img/gardena-1.jpg" alt="G1">
+          <img src="img/gardena-2.jpg" alt="G2">
+        </div>
+        <div class="r-hstack">
+          <img src="img/wifi-1.jpg" alt="W1">
+          <img src="img/wifi-2.jpg" alt="W2">
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>ESP 8266</h3>
+      <div class="r-hstack">
+        <img src="img/esp-12s.png" alt="ESP-12S">
+        <div class="hspace">
+          <ul>
+            <li>powerful RISC CPU: 80-160MHz</li>
+            <li>flash memory: 512KiB - 16MiB</li>
+            <li>onboard WiFi</li>
+            <li>2-10 GPIO or more</li>
+            <li>1 ADC</li>
+            <li><span class="black bg2">damn cheap &#129477;&#129477;&#129477;</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Wemos D1 Mini</h3>
+      <div class="r-hstack">
+        <img src="img/wemos-d1-mini.png" alt="Wemos D1 Mini">
+        <div class="hspace">
+          <p>as above plus:</p>
+          <ul>
+            <li>USB programmer</li>
+            <li>voltage regulator</li>
+            <li>ADC voltage divider</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>ESP Easy firmware</h3>
+      <img src="img/esp-easy.jpg" alt="ESP Easy" style="height: 450px;">
+    </section>
+
+    <section>
+      <h3>Additional hardware</h3>
+      <div class="r-vstack hsmalltiles">
+        <div class="r-hstack">
+          <img src="img/relay.jpg" alt="Relay">
+          <p>8 channel electromechanical relay</p>
+        </div>
+        <div class="r-hstack">
+          <p>12V LED power supply unit</p>
+          <img src="img/led-psu.jpg" alt="PSU">
+        </div>
+        <div class="r-hstack">
+          <img src="img/5v-psu.jpg" alt="5V">
+          <p>5V micro power supply unit</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Analog Humidity Sensor</h3>
+      <img src="img/soilwatch.jpg" alt="SoilWatch">
+    </section>
+
+    <section>
+      <h3>ESP Easy - implementation</h3>
+
+      <section>
+        <div class="r-vstack">
+          <figure>
+            <img src="img/esp-easy-listener.jpg" alt="Listener">
+            <figcaption>import from MQTT - trigger</figcaption>
+          </figure>
+          <figure>
+            <img src="img/esp-easy-dummy.jpg" alt="Dummy">
+            <figcaption>variables for valve opening calculations</figcaption>
+          </figure>
+          <figure>
+            <img src="img/esp-easy-adjustment.jpg" alt="Adjustment">
+            <figcaption>import from MQTT - valve configuration</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <pre><code class="hljs" data-trim data-line-numbers="|1|2-13|15-18|20-27|28-31|35-50|52-66|68-82|84-88">
+          on listener#valveCmd do
+            if [listener#valveCmd]<=0
+              TimerSet,1,0
+              TimerSet,2,0
+              TimerSet,3,0
+              TimerSet,4,0
+              GPIO,5,0
+              GPIO,4,0
+              GPIO,14,0
+              GPIO,12,0
+              Publish,"Podlewacz/valve/state", 0
+              Publish,"Podlewacz/state","Emergency shut-off"
+            else
+              if [listener#valveCmd]<2600
+                TaskValueSet,3,1,[listener#valveCmd]*[adjustment#valve1]
+                TaskValueSet,3,2,[listener#valveCmd]*[adjustment#valve2]
+                TaskValueSet,3,3,[listener#valveCmd]*[adjustment#valve3]
+                TaskValueSet,3,4,[listener#valveCmd]*[adjustment#valve4]
+                Publish,"Podlewacz/valve/state", 1
+                if [valves0#valve1]>=1
+                  GPIO,5,1
+                  Publish,"Podlewacz/state","Valve 1 open"
+                  if [valves0#valve1]<2400
+                    TimerSet,1,[valves0#valve1]
+                  else
+                    TimerSet,1,2400
+                  endif
+                else
+                  Publish,"Podlewacz/state","Valve 1 skipped"
+                  TimerSet,1,3
+                endif
+              endif
+            endif
+          endon
+
+          on Rules#Timer=1 do
+            GPIO,5,0
+            if [valves0#valve2]>=1
+              GPIO,4,1
+              Publish,"Podlewacz/state","Valve 2 open"
+              if [valves0#valve2]<2400
+                TimerSet,2,[valves0#valve2]
+              else
+                TimerSet,2,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 2 skipped"
+              TimerSet,2,3
+            endif
+          endon
+
+          on Rules#Timer=2 do
+            GPIO,4,0
+            if [valves0#valve3]>=1
+              GPIO,14,1
+              Publish,"Podlewacz/state","Valve 3 open"
+              if [valves0#valve3]<2400
+                TimerSet,3,[valves0#valve3]
+              else
+                TimerSet,3,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 3 skipped"
+              TimerSet,3,3
+            endif
+          endon
+
+          on Rules#Timer=3 do
+            GPIO,14,0
+            if [valves0#valve4]>=1
+              GPIO,12,1
+              Publish,"Podlewacz/state","Valve 4 open"
+              if [valves0#valve4]<2400
+                TimerSet,4,[valves0#valve4]
+              else
+                TimerSet,4,2400
+              endif
+            else
+              Publish,"Podlewacz/state","Valve 4 skipped"
+              TimerSet,4,3
+            endif
+          endon
+
+          on Rules#Timer=4 do
+              GPIO,12,0
+              Publish,"Podlewacz/valve/state",0
+              Publish,"Podlewacz/state","Idle"
+          endon
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <img src="img/home-assistant-logo.svg" alt="Hass" style="height: 100px; width: 100px; position: absolute; left: 0; top: 0; opacity: 0.5">
+      <section>
+        <p>Architecture with Home Assistant and MQTT</p>
+        <img src="img/architecture.png" alt="Architecture">
+      </section>
+
+      <section>
+        <div class="r-vstack">
+          <img src="img/mqtt.jpg" alt="MQTT" style="width: 600px;">
+          <ul>
+            <li>Topic: <code>listener/valveCmd</code> - seconds to run</li>
+            <li>Topic: <code>adjustment/valve1|2|3|4</code> - weight per valve</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="r-hstack">
+          <img src="img/hass-panel.jpg" alt="Panel" style="height: 420px;">
+          <div style="margin-left: 1em;" class="small">
+            <ol>
+              <li>Soil humidity indicator.</li>
+              <li>Automatic mode configuration.</li>
+              <li>Watering "curve" configuration.</li>
+              <li>Valve weighting.</li>
+              <li>"Hysteresis" status.</li>
+              <li>Manual watering trigger.</li>
+              <li>Emergency shut down trigger..</li>
+              <li>Manual watering time slider.</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Time depends on humidity</h4>
+        <div>
+          <p class="gray">given input parameters:</p>
+          \[ t_{min}, t_{max}, h_{min}, h_{max} \]
+        </div>
+        <div>
+          <p class="gray">then we have:</p>
+            \[ t = \left\{ \begin{array}{ll}
+                          0, &amp; h > h_{max} \\
+                          t_{max}, &amp; h < h_{min} \\
+                          \frac{t_{max} - t_{min}}{h_{max} - h_{min}} (h_{min} - h) + t_{min}, &amp; h_{min} <= h <= h_{max}
+                        \end{array}
+                \right. \]
+        </div>
+      </section>
+
+      <section>
+        <div class="r-vstack">
+          <div>
+            \[ \begin{array}{ll}
+                  t_{min} = 20 &amp; t_{max} = 45 \\
+                  h_{min} = 20 &amp; h_{max} = 80 \\
+              \end{array}
+            \]
+          </div>
+          <canvas data-chart="line" width="300" height="100">
+            <!--
+            {
+              "data": {
+                "datasets": [{
+                  "label": "watering curve",
+                  "data": [
+                    {"x": 0, "y": 45},
+                    {"x": 20, "y": 45},
+                    {"x": 80, "y": 20},
+                    {"x": 80, "y": 0},
+                    {"x":100, "y": 0}
+                    ]
+                }]
+              },
+              "options": {
+                "scales" : {
+                  "xAxes": [{
+                    "type": "linear",
+                    "scaleLabel": {
+                      "display": "true",
+                      "labelString": "soil humidity [%]"
+                    },
+                    "ticks": {
+                      "suggestedMin": 0,
+                      "suggestedMax": 100
+                    }
+                  }],
+                  "yAxes": [{
+                    "scaleLabel": {
+                      "display": "true",
+                      "labelString": "time [min]"
+                    },
+                    "ticks": {
+                      "suggestedMin": 0,
+                      "suggestedMax": 60
+                    }
+                  }]
+                }
+              }
+            }
+            -->
+          </canvas>
+        </div>
+      </section>
+
+      <section>
+        <pre class="yaml"><code class="hljs" data-trim data-line-numbers>
+          automation:
+           - alias: "Smart gardener checks for condition once per day"
+             trigger:
+               platform: time
+               at: "03:00:00"
+             action:
+               service: script.evaluate_watering_time
+          script:
+             evaluate_watering_time:
+               sequence:
+                 - condition: state
+                   entity_id: 'input_boolean.watering_enable'
+                   state: 'on'
+                 - condition: numeric_state
+                   entity_id: 'input_number.watering_delay_counter'
+                   below: 1
+                 - service: system_log.write
+                   data_template:
+                     message: >
+                        Running the script
+                        {{ states('sensor.wilgotnosc_gruntu') | float }},
+                        {{ states('input_number.watering_off_threshold') | float }}
+                     level: debug
+                     logger: homeassistant.podlewacz
+                 - service: mqtt.publish
+                   data:
+                     topic: Podlewacz/listener/valveCmd
+                     payload_template: >
+                       {% if states('sensor.wilgotnosc_gruntu') | float
+                          > states('input_number.watering_off_threshold') | float %}
+                         0.0
+                       {% elif states('sensor.wilgotnosc_gruntu') | float
+                          < states('input_number.watering_full_threshold') | float %}
+                         {{ (states('input_number.watering_maximal_time') | float)*60 }}
+                       {% else %}
+                         {{ (
+                              (
+                                states('input_number.watering_maximal_time') | float
+                                - states('input_number.watering_minimal_time') | float
+                              )
+                            /
+                              (
+                                states('input_number.watering_full_threshold') | float
+                                - states('input_number.watering_off_threshold') | float
+                              )
+                            *
+                              (
+                                states('sensor.wilgotnosc_gruntu') | float
+                                - states('input_number.watering_off_threshold') | float
+                              )
+                            + states('input_number.watering_minimal_time') | float
+                            )*60 }}
+                       {% endif %}
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <h3>Complete system</h3>
+      <div class="r-hstack">
+        <img src="img/complete%20system.jpg" alt="C1" style="width: 300px;">
+        <img src="img/complete-system-loop.jpg" alt="Loop" style="width: 300px;">
+      </div>
+    </section>
+
+    <section>
+      <section data-background-image="img/lame-psu.jpg" data-background-opacity="0.75">
+        <p>Simplified power supply</p>
+        <div>
+          \[ \Delta V = \Delta I \cdot R \]
+        </div>
+      </section>
+      <section>
+        <h3>Use Wemos D1 Pro and external antenna</h3>
+        <div class="r-hstack hbigtiles">
+          <img src="img/wemos-d1-mini-pro.png" alt="Pro">
+          <img src="img/case.jpg" alt="Case">
+        </div>
+      </section>
+      <section>
+        <h3>Expand to full 8 channels</h3>
+        <figure class="hbigtiles">
+          <img src="img/expander.jpg" alt="Expander">
+          <figcaption>PCF 8574N (I2C)</figcaption>
+        </figure>
+      </section>
+    </section>
+
+    <section>
+      <h1>QA</h1>
+    </section>
+  </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script src="plugin/chart/Chart.min.js"></script>
+<script src="plugin/chart/plugin.js"></script>
+<script src="plugin/chalkboard/plugin.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        width: 1200,
+        hash: true,
+        navigationMode: 'linear',
+        slideNumber: 'c/t',
+        // Learn about plugins: https://revealjs.com/plugins/
+        chart: {
+            defaults: {
+                global: {
+                    title: { fontColor: "#FFF" },
+                    legend: {
+                        position: "bottom",
+                        labels: { fontColor: "#FFF" },
+                    },
+                    tooltips: {
+                        labels: { fontColor: "#FFF" },
+                    },
+                },
+                scale: {
+                    scaleLabel: { fontColor: "#FFF" },
+                    gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                    ticks: { fontColor: "#FFF" },
+                }
+            },
+            line: { borderColor: [ "magenta" , "cyan", "red" ],
+                lineTension: "0", cubicInterpolationMode: "default"},
+            bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+            pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+            radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
+        },
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealChart, RevealChalkboard]
+    });
+</script>
+</body>
 </html>
