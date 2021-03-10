@@ -22,7 +22,7 @@
     <section data-background-image="img/koniuszko.jpg" data-background-opacity="0.8">
       <h2>Smart Gardener</h2>
       <h3>with ESP8266, HomeAssistant and RPi3</h3>
-      <p>Maciej Małecki</p>
+      <p>Maciej Małecki, IoT Community, <img src="img/cg-logo.svg" alt="CG" style="margin: 0; position: relative; top: 10px;">, 2021.</p>
     </section>
 
     <section>
@@ -272,7 +272,7 @@
 
     <section data-background-image="img/central-unit.jpg">
     </section>
-    
+
     <section>
       <img src="img/home-assistant-logo.svg" alt="Hass" style="height: 100px; width: 100px; position: absolute; left: 0; top: 0; opacity: 0.5">
       <section>
@@ -485,7 +485,7 @@
       <h1>QA</h1>
       <div class="r-vstack">
         <img src="img/qrcode.png" alt="QR">
-        <a href="https://maciejmalecki.github.io/gardener-slides/index.html">https://maciejmalecki.github.io/gardener-slides/index.html</a>
+        <a href="https://maciejmalecki.github.io/gardener-slides/">https://maciejmalecki.github.io/gardener-slides/</a>
       </div>
     </section>
   </div>
@@ -499,6 +499,7 @@
 <script src="plugin/chart/Chart.min.js"></script>
 <script src="plugin/chart/plugin.js"></script>
 <script src="plugin/chalkboard/plugin.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
 <script>
     // More info about initialization & config:
     // - https://revealjs.com/initialization/
@@ -533,7 +534,7 @@
             pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
             radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]},
         },
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealChart, RevealChalkboard]
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath, RevealChart, RevealChalkboard, RevealZoom]
     });
 </script>
 </body>
